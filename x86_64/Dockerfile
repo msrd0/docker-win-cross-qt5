@@ -10,7 +10,7 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends \
 		make \
 		sed \
 		sudo \
-		xzip \
+		xz-utils \
  && echo "deb http://pkg.mxe.cc/repos/apt/debian jessie main" | tee /etc/apt/sources.list.d/mxe.list \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D43A795B73B16ABE9643FE1AFD8FFF16DB45C6AB \
  && apt-get -y update && apt-get -y install --no-install-recommends \
