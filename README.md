@@ -9,6 +9,7 @@ Based on [`debian`](https://hub.docker.com/_/debian/) and [`mxe`](http://mxe.cc/
 
 - `i686` ([Dockerfile](https://github.com/msrd0/docker-win-cross-qt5/blob/master/i686/Dockerfile))
 - `x86_64` ([Dockerfile](https://github.com/msrd0/docker-win-cross-qt5/blob/master/x86_64/Dockerfile))
+- `both`, `latest` ([Dockerfile](https://github.com/msrd0/docker-win-cross-qt5/blob/master/both/Dockerfile))
 
 ## Cross-Compiling
 
