@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get -y update && apt-get -y install --no-install-recommends \
@@ -12,8 +12,8 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends \
 		sed \
 		sudo \
 		xz-utils \
- && echo "deb http://pkg.mxe.cc/repos/apt stretch main" | tee /etc/apt/sources.list.d/mxe.list \
- && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C6BF758A33A3A276 \
+ && echo "deb http://pkg.mxe.cc/repos/apt buster main" | tee /etc/apt/sources.list.d/mxe.list \
+ && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 86B72ED9 \
  && apt-get -y update && apt-get -y install --no-install-recommends \
 		mxe-x86-64-w64-mingw32.static-qtbase \
  && mkdir -p /etc/sudoers.d \
