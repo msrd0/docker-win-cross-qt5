@@ -27,7 +27,7 @@ jobs:
           docker build . \
             --pull \
             --tag $image \
-            --build-arg architectures=${{ matrix.architectures }}
+            --build-arg architectures="${{ matrix.architectures }}"
           
           docker login -u msrd0 -p "${{ secrets.GHCR_TOKEN }}" ghcr.io
           docker push $image
