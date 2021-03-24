@@ -1,0 +1,33 @@
+name: Docker
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: '0 4 * * 1' # every monday at 04:00 UTC
+
+jobs:
+  docker:
+    name: docker-${{ matrix.tag }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - architectures: "x86-64"
+            tag: "x86_64"
+          - architectures: "i686"
+            tag: "i686"
+          - architectures: "i686 x86-64"
+            tag: "latest"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Push Docker Image
+        run: |
+          image="ghcr.io/msrd0/win-cross-qt5:${{ matrix.tag }}"
+          docker build . \
+            --pull \
+            --tag $image \
+            --build-arg architectures=${{ matrix.architectures }}
+          
+          docker login -u msrd0 -p "${{ secrets.GHCR_TOKEN }}" ghcr.io
+          docker push $image

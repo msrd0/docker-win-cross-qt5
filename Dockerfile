@@ -1,6 +1,12 @@
 FROM debian:buster-slim
+SHELL ["/bin/bash", "-uo", "pipefail", "-c"]
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+LABEL org.opencontainers.image.url="https://github.com/users/msrd0/packages/container/package/win-cross-qt5"
+LABEL org.opencontainers.image.title="Qt5 Cross-Compiling Tools for Windows"
+LABEL org.opencontainers.image.description="Qt5 Cross-Compiling Tools for Windows based on Debian and MXE"
+LABEL org.opencontainers.image.source="https://github.com/msrd0/docker-win-cross-qt5"
+
+ARG architectures="i686 x86-64"
 RUN apt-get -y update && apt-get -y install --no-install-recommends \
 		bzip2 \
 		ca-certificates \
@@ -14,9 +20,9 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends \
 		xz-utils \
  && echo "deb http://pkg.mxe.cc/repos/apt buster main" | tee /etc/apt/sources.list.d/mxe.list \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 86B72ED9 \
- && apt-get -y update && apt-get -y install --no-install-recommends \
-		mxe-i686-w64-mingw32.static-qtbase \
-		mxe-x86-64-w64-mingw32.static-qtbase \
+ && apt-get -y update \
+ && apt-get -y install --no-install-recommends \
+		$(for arch in $architectures; do printf 'mxe-%s-w64-mingw32.static-qtbase' "$arch"; done) \
  && mkdir -p /etc/sudoers.d \
  && useradd -m -d /home/user user \
  && echo 'user ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/user \
