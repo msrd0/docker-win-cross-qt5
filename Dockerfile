@@ -22,7 +22,7 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 86B72ED9 \
  && apt-get -y update \
  && apt-get -y install --no-install-recommends \
-		$(for arch in $architectures; do printf 'mxe-%s-w64-mingw32.static-qtbase' "$arch"; done) \
+		$(for arch in $architectures; do printf ' mxe-%s-w64-mingw32.static-qtbase ' "$arch"; done) \
  && mkdir -p /etc/sudoers.d \
  && useradd -m -d /home/user user \
  && echo 'user ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/user \
